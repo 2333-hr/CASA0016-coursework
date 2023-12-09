@@ -1,0 +1,71 @@
+#include <Adafruit_NeoPixel.h>
+#include <DHT.h>
+
+// DHT22 sensor setup
+#define DHTPIN 2         // DHT22 connected to digital pin 2
+#define DHTTYPE DHT22    // Use DHT22 sensor
+DHT dht(DHTPIN, DHTTYPE);
+
+// NeoPixel LED strip setup
+#define LED_PIN 7        // LED strip connected to digital pin 7
+#define NUMPIXELS 8      // Number of LEDs in the strip
+Adafruit_NeoPixel pixels(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+// Motor driver module setup
+const int motorPin = 4; // Motor driver module connected to digital pin 4
+const int pirPin = 3;   // PIR sensor connected to digital pin 3
+
+// Humidity threshold
+const float humidityThreshold = 60.0; // Example, set the threshold to 60%
+
+void setup() {
+  pinMode(motorPin, OUTPUT);
+  pinMode(pirPin, INPUT); // Set PIR sensor pin as input
+  dht.begin();
+  pixels.begin();
+  pixels.setBrightness(50); // Set LED brightness
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read humidity
+  float humidity = dht.readHumidity();
+  // Read PIR sensor
+  int pirValue = digitalRead(pirPin);
+
+  // Check if humidity reading was successful
+  if (isnan(humidity)) {
+    Serial.println("Failed to read from DHT sensor!");
+    return;
+  }
+
+  // Control motor and LED strip
+  if (humidity > humidityThreshold) {
+    digitalWrite(motorPin, HIGH); // Start the water pump
+    if(pirValue == HIGH) { // When motion is detected close by
+      setAllPixels(255, 0, 0); // Red
+    }
+  } else {
+    digitalWrite(motorPin, LOW); // Stop the water pump
+    if(pirValue == HIGH) { // When motion is detected close by
+      setAllPixels(0, 255, 0); // Green
+    }
+  }
+
+  // If no motion is detected, turn off LED strip
+  if(pirValue == LOW) {
+    setAllPixels(0, 0, 0); // Turn off LED
+  }
+
+  // Output current humidity value to serial
+  Serial.print("Humidity: ");
+  Serial.println(humidity);
+  delay(2000); // Wait some time before reading again
+}
+
+void setAllPixels(uint8_t red, uint8_t green, uint8_t blue) {
+  for(int i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(red, green, blue));
+  }
+  pixels.show();
+}
