@@ -60,7 +60,7 @@ void loop() {
   // Output current humidity value to serial
   Serial.print("Humidity: ");
   Serial.println(humidity);
-  delay(2000); // Wait some time before reading again
+  delay(300000); // Wait some time before reading again
 }
 
 void setAllPixels(uint8_t red, uint8_t green, uint8_t blue) {
