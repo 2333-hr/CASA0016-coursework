@@ -122,7 +122,7 @@ After the display, the teacher's suggestion was that the packaging size was too 
 
 <img width="238" alt="image" src="https://github.com/2333-hr/CASA0016-coursework/assets/146243657/e06a5603-3e6f-4561-a68b-f715a88495c8">
 
-# main function
+# Main function
 -When the humidity is higher than the set humidity threshold, the dehumidifier (simulated  as a water pump in this project) starts until the humidity is lower than the set threshold.
 -The LED strip can display the current room humidity status to the user through the light color.When the room humidity is higher than the set threshold, the LED strip turns red, otherwise it is green.
 -When a person is approaching and is detected by the PIR monitor, the LED strip lights up to show the current humidity state of the room.When no one is observing, the LED strip goes out to save energy, and other components operate normally.
