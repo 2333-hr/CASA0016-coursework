@@ -3,7 +3,7 @@ This project aims at creating a smart dehumidifier that automatically regulates 
 
 ![d5bcbbdea3ca29e158ff35d15369780](https://github.com/2333-hr/CASA0016-coursework/assets/146243657/4b53368f-8c99-450c-b964-e901a0f60a17)
 
-# overview
+# Overview
 With rising living standards and growing health awareness, indoor air quality is increasingly crucial. Maintaining appropriate indoor humidity levels is crucial for comfort and health, as excess moisture can cause discomfort, encourage mold, and foster harmful microorganisms.
 Applicable in various settings such as homes in damp regions, storage spaces for books and artwork, and laundry areas, this device serves those in humid climates, individuals with specific storage needs, and anyone seeking to enhance their living quality through automated humidity control. The device operates autonomously, adjusting to environmental conditions to ensure a consistently pleasant indoor atmosphere while promoting energy efficiency and a sustainable lifestyle.
 
@@ -30,7 +30,7 @@ Applicable in various settings such as homes in damp regions, storage spaces for
 - DHT22, PIR monitor, motor drive module, and RGB LED are all connected in parallel in the circuit.
 - The water pump is connected to the motor drive module through terminals.
 - The DHT22 signal pin is at No. 2; the light bar signal pin is at No. 7; the PIR monitor signal pin is at No. 3; the L9110 signal ground wire is connected to the negative pole of the power supply, and the signal input wire is connected to No. 4.
-# code
+# Code
 1.Library Inclusion and Sensor/Actuator Setup:
 This block includes necessary libraries and defines the pins and settings for the DHT22 sensor, NeoPixel LED strip, and motor driver module.
 
@@ -112,8 +112,9 @@ The loop() function contains the logic to read the humidity, control the motor, 
 ```
 
 The function of this code is to control the water pump based on the reading of the temperature and humidity sensor, and to change the color of the LED bar based on whether the PIR sensor detects the movement. When the humidity exceeds 60% and the motion is detected, the LED displays red and the pump is opened; when the humidity is below 60%, the LED displays green. If no motion is detected, the LED turns off regardless of humidity.
+
 # Enclosure
-For the outer package of the project, I used a 3mm birch template with laser cut into a square box with mortise and tenon joint structure, and bonded the outer package with wood glue. Window-shaped hollow cuts on one of the sides for heat dissipation. The initial cutting drawings are as follows:
+For the outer package of the project, I used MakerCase as a template and the final casing in CAD. I used a 3mm pine board with laser cut into a square box with mortise and tenon joint structure, and assembled the outer package using wood glue. Also I incorporated window-shaped hollow cuts on one side for heat dissipation. The initial cutting drawings are as follows:
 
 <img width="213" alt="image" src="https://github.com/2333-hr/CASA0016-coursework/assets/146243657/4d21d15b-ebc6-4898-a0d2-c585c9da50f4">
 
@@ -125,7 +126,7 @@ After the display, the teacher's suggestion was that the packaging size was too 
 -When the humidity is higher than the set humidity threshold, the dehumidifier (simulated  as a water pump in this project) starts until the humidity is lower than the set threshold.
 -The LED strip can display the current room humidity status to the user through the light color.When the room humidity is higher than the set threshold, the LED strip turns red, otherwise it is green.
 -When a person is approaching and is detected by the PIR monitor, the LED strip lights up to show the current humidity state of the room.When no one is observing, the LED strip goes out to save energy, and other components operate normally.
-Using MakerCase as a template, I designed the final casing in CAD.
+
 # Future Improvements
 - Function Expansion**: Plans to add humidification capabilities to adapt to different indoor humidity conditions.
 - Sensor Integration**: Integration of air quality sensors like PM2.5, VOCs, and CO2 to create a comprehensive indoor air quality management system.
