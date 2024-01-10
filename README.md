@@ -1,11 +1,15 @@
 # Smart Dehumidifier: Design and Energy Efficiency in Indoor Air Quality Management
 This project aims at creating a smart dehumidifier that automatically regulates humidity, activating when humidity exceeds a preset threshold, thereby providing a healthier living space while reducing the risk of building damage and health problems caused by excessive humidity.
+
 ![d5bcbbdea3ca29e158ff35d15369780](https://github.com/2333-hr/CASA0016-coursework/assets/146243657/4b53368f-8c99-450c-b964-e901a0f60a17)
-#overview
+
+# overview
 With rising living standards and growing health awareness, indoor air quality is increasingly crucial. Maintaining appropriate indoor humidity levels is crucial for comfort and health, as excess moisture can cause discomfort, encourage mold, and foster harmful microorganisms.
 Applicable in various settings such as homes in damp regions, storage spaces for books and artwork, and laundry areas, this device serves those in humid climates, individuals with specific storage needs, and anyone seeking to enhance their living quality through automated humidity control. The device operates autonomously, adjusting to environmental conditions to ensure a consistently pleasant indoor atmosphere while promoting energy efficiency and a sustainable lifestyle.
+
 ![image](https://github.com/2333-hr/CASA0016-coursework/assets/146243657/871b9115-cb39-45cb-838b-48c2d5ee6db2)
-#Hardware
+
+# Hardware
 | COMPONENTS        | TYPE                        | FUNCTION                                                                                      |
 |-------------------|-----------------------------|-----------------------------------------------------------------------------------------------|
 | ARDUINO UNO R3    | Microcontroller Development Board | Provides power/controls the behavior of all other components/it reads sensor data, makes decisions based on logical judgment, and directs actuators such as motors and LED strips to work as required |
@@ -16,16 +20,17 @@ Applicable in various settings such as homes in damp regions, storage spaces for
 | Small Water Pump  | Actuator                    | Simulated dehumidifier as a low voltage circuit project model component.                      |
 | Switch Board      | Switch Perfboard            | Control circuit connection                                                                   |
 
-#Schematics
-##Component assembly drawing
+# Schematics
+## Component assembly drawing
 ![image](https://github.com/2333-hr/CASA0016-coursework/assets/146243657/847b1367-ad37-4a73-b9d5-678f543d6957)
-##Breadboard
+
+## Breadboard
 ![Untitled Sketch 3_bb](https://github.com/2333-hr/CASA0016-coursework/assets/146243657/a8bcf783-90f4-4bcb-bd8b-847d8870253b)
 - The switch is connected in series with the power line.
 - DHT22, PIR monitor, motor drive module, and RGB LED are all connected in parallel in the circuit.
 - The water pump is connected to the motor drive module through terminals.
 - The DHT22 signal pin is at No. 2; the light bar signal pin is at No. 7; the PIR monitor signal pin is at No. 3; the L9110 signal ground wire is connected to the negative pole of the power supply, and the signal input wire is connected to No. 4.
-#code
+# code
 1.Library Inclusion and Sensor/Actuator Setup:
 This block includes necessary libraries and defines the pins and settings for the DHT22 sensor, NeoPixel LED strip, and motor driver module.
 
@@ -107,7 +112,7 @@ The loop() function contains the logic to read the humidity, control the motor, 
 ```
 
 The function of this code is to control the water pump based on the reading of the temperature and humidity sensor, and to change the color of the LED bar based on whether the PIR sensor detects the movement. When the humidity exceeds 60% and the motion is detected, the LED displays red and the pump is opened; when the humidity is below 60%, the LED displays green. If no motion is detected, the LED turns off regardless of humidity.
-#Enclosure
+# Enclosure
 For the outer package of the project, I used a 3mm birch template with laser cut into a square box with mortise and tenon joint structure, and bonded the outer package with wood glue. Window-shaped hollow cuts on one of the sides for heat dissipation. The initial cutting drawings are as follows:
 
 <img width="213" alt="image" src="https://github.com/2333-hr/CASA0016-coursework/assets/146243657/4d21d15b-ebc6-4898-a0d2-c585c9da50f4">
@@ -116,12 +121,12 @@ After the display, the teacher's suggestion was that the packaging size was too 
 
 <img width="238" alt="image" src="https://github.com/2333-hr/CASA0016-coursework/assets/146243657/e06a5603-3e6f-4561-a68b-f715a88495c8">
 
-#main function
+# main function
 -When the humidity is higher than the set humidity threshold, the dehumidifier (simulated  as a water pump in this project) starts until the humidity is lower than the set threshold.
 -The LED strip can display the current room humidity status to the user through the light color.When the room humidity is higher than the set threshold, the LED strip turns red, otherwise it is green.
 -When a person is approaching and is detected by the PIR monitor, the LED strip lights up to show the current humidity state of the room.When no one is observing, the LED strip goes out to save energy, and other components operate normally.
 Using MakerCase as a template, I designed the final casing in CAD.
-#Future Improvements
+# Future Improvements
 - Function Expansion**: Plans to add humidification capabilities to adapt to different indoor humidity conditions.
 - Sensor Integration**: Integration of air quality sensors like PM2.5, VOCs, and CO2 to create a comprehensive indoor air quality management system.
 - Performance Enhancement**: Use of more accurate humidity sensors and efficient pumps and fans to improve performance and reduce energy consumption.
@@ -130,5 +135,5 @@ Using MakerCase as a template, I designed the final casing in CAD.
 - Smart Home Integration**: The project will become an essential part of smart home systems, offering comprehensive indoor environment control in collaboration with other devices.
 - Health Protection**: Automatic adjustment of indoor humidity to prevent health issues related to humidity, such as asthma and allergies.
 - Special Applications**: Plays a vital role in special environments like storage of collectibles, protecting sensitive items.
-#Contact information
+# Contact information
 ucfnhy0@ucl.ac.uk
