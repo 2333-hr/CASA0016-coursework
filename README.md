@@ -18,7 +18,8 @@ Applicable in various settings such as homes in damp regions, storage spaces for
 | L9110 Motor Driver| Motor Driver                | Receive commands from Arduino to control the water pump on and off.                           |
 | NeoPixel LED Stick| Actuator                    | Visualize ambient humidity by changing color based on DHT22 sensor readings.                  |
 | Small Water Pump  | Actuator                    | Simulated dehumidifier as a low voltage circuit project model component.                      |
-| Switch Board      | Switch Perfboard            | Control circuit connection                                                                   |
+| SPST Switch       | Switch                      | Control circuit connection                                                                   |
+| Stripboard        | Board                       | Used to integrate circuits                                                                                             |
 
 # Schematics
 ## Component Assembly Drawing
