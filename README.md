@@ -15,6 +15,7 @@ Applicable in various settings such as homes in damp regions, storage spaces for
 | NeoPixel LED Stick| Actuator                    | Visualize ambient humidity by changing color based on DHT22 sensor readings.                  |
 | Small Water Pump  | Actuator                    | Simulated dehumidifier as a low voltage circuit project model component.                      |
 | Switch Board      | Switch Perfboard            | Control circuit connection                                                                   |
+
 #Schematics
 ##Component assembly drawing
 ![image](https://github.com/2333-hr/CASA0016-coursework/assets/146243657/847b1367-ad37-4a73-b9d5-678f543d6957)
@@ -27,16 +28,84 @@ Applicable in various settings such as homes in damp regions, storage spaces for
 #code
 1.Library Inclusion and Sensor/Actuator Setup:
 This block includes necessary libraries and defines the pins and settings for the DHT22 sensor, NeoPixel LED strip, and motor driver module.
-<img width="285" alt="image" src="https://github.com/2333-hr/CASA0016-coursework/assets/146243657/f4e397f5-bbae-4307-9a92-af48893a27d1">
+
+```#include <Adafruit_NeoPixel.h>
+#include <DHT.h>
+
+#define DHTPIN 2
+#define DHTTYPE DHT22
+DHT dht(DHTPIN, DHTTYPE);
+
+#define LED_PIN 7
+#define NUMPIXELS 8
+Adafruit_NeoPixel pixels(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+const int motorPin = 4;
+const int pirPin = 3;
+```
+
 2.Configuration and Initialization:
 In setup(), pins are configured as input or output, and the sensors and actuators are initialized.
-<img width="267" alt="image" src="https://github.com/2333-hr/CASA0016-coursework/assets/146243657/10fb8111-1508-4a84-b90d-607597fbcf44">
+
+```void setup() {
+  pinMode(motorPin, OUTPUT);
+  pinMode(pirPin, INPUT);
+  dht.begin();
+  pixels.begin();
+  pixels.setBrightness(50);
+  Serial.begin(9600);}
+```
+
 3.Main Logic in Loop Function:
 The loop() function contains the logic to read the humidity, control the motor, and adjust the LED colors based on the humidity level and PIR sensor input.
-<img width="287" alt="image" src="https://github.com/2333-hr/CASA0016-coursework/assets/146243657/3ee3c1d1-a912-4f98-bff1-f94aa5ed2030">
+
+```void loop() {
+  // Read humidity
+  float humidity = dht.readHumidity();
+  // Read PIR sensor
+  int pirValue = digitalRead(pirPin);
+
+  // Check if humidity reading was successful
+  if (isnan(humidity)) {
+    Serial.println("Failed to read from DHT sensor!");
+    return;
+  }
+
+  // Control motor and LED strip
+  if (humidity > humidityThreshold) {
+    digitalWrite(motorPin, HIGH); // Start the water pump
+    if(pirValue == HIGH) { // When motion is detected close by
+      setAllPixels(255, 0, 0); // Red
+    }
+  } else {
+    digitalWrite(motorPin, LOW); // Stop the water pump
+    if(pirValue == HIGH) { // When motion is detected close by
+      setAllPixels(0, 255, 0); // Green
+    }
+  }
+
+  // If no motion is detected, turn off LED strip
+  if(pirValue == LOW) {
+    setAllPixels(0, 0, 0); // Turn off LED
+  }
+
+  // Output current humidity value to serial
+  Serial.print("Humidity: ");
+  Serial.println(humidity);
+  delay(2000); // Wait some time before reading again
+}
+```
+
 4.LED Control Function:
  The setAllPixels() function changes the color of all the pixels in the LED strip.
-<img width="285" alt="image" src="https://github.com/2333-hr/CASA0016-coursework/assets/146243657/152ef1b3-7dc6-4889-9f8b-412d1b34b77b">
+
+```void setAllPixels(uint8_t red, uint8_t green, uint8_t blue) {
+  for(int i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(red, green, blue));
+  }
+  pixels.show();}
+```
+
 The function of this code is to control the water pump based on the reading of the temperature and humidity sensor, and to change the color of the LED bar based on whether the PIR sensor detects the movement. When the humidity exceeds 60% and the motion is detected, the LED displays red and the pump is opened; when the humidity is below 60%, the LED displays green. If no motion is detected, the LED turns off regardless of humidity.
 #Enclosure
 For the outer package of the project, I used a 3mm birch template with laser cut into a square box with mortise and tenon joint structure, and bonded the outer package with wood glue. Window-shaped hollow cuts on one of the sides for heat dissipation. The initial cutting drawings are as follows:
